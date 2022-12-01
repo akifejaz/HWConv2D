@@ -1,8 +1,0 @@
-0.6
-2019.1
-May 24 2019
-15:06:07
-D:/Akif/ITU/Semester 7/FYI-I/Vivado/convolution2D/convolution2D.sim/sim_1/behav/xsim/glbl.v,1558713910,verilog,,,,glbl,,,,,,,,
-D:/Akif/ITU/Semester 7/FYI-I/Vivado/convolution2D/convolution2D.srcs/sources_1/new/Module_2DConvTB.v,1669578474,verilog,,,,Module_2DConvTB,,,,,,,,
-D:/Akif/ITU/Semester 7/FYI-I/Vivado/convolution2D/convolution2D.srcs/sources_1/new/Module_Conv2D.v,1669577963,verilog,,D:/Akif/ITU/Semester 7/FYI-I/Vivado/convolution2D/convolution2D.srcs/sources_1/new/Module_SRAM.v,,Module_Conv2D,,,,,,,,
-D:/Akif/ITU/Semester 7/FYI-I/Vivado/convolution2D/convolution2D.srcs/sources_1/new/Module_SRAM.v,1669570513,verilog,,D:/Akif/ITU/Semester 7/FYI-I/Vivado/convolution2D/convolution2D.srcs/sources_1/new/Module_2DConvTB.v,,Module_SRAM,,,,,,,,

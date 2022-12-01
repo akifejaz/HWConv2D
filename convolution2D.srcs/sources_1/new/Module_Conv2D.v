@@ -49,7 +49,7 @@ module Module_Conv2D#(
 initial begin
     assign dot_product = product[0] + product[1] + product[2];
         // output the result
-    assign c_out = acc_out;
+    assign c_out = dot_product;
 end
     // accumulate the dot product
     always @(posedge clk or negedge arst_n) begin
@@ -73,8 +73,10 @@ end
             product[1] <= data[15:8] * kernal[15:8];
             product[2] <= data[23:16] * kernal[23:16];
 
-            $display("product[0] = %b product[1] = %b product[2] = %b", product[0], product[1], product[2]);
-            $display("data = %b kernal = %b", data, kernal);
+//            $display("product[0] = %b product[1] = %b product[2] = %b", product[0], product[1], product[2]);
+            $display("data[7:0] = %d data[15:8] = %d data[23:16] = %d", data[7:0], data[15:8], data[23:16]);
+            $display("kernal[7:0] = %d kernal[15:8] = %d kernal[23:16] = %d", kernal[7:0], kernal[15:8], kernal[23:16]);
+//            $display("data = %b kernal = %b", data, kernal);
         end
     end
 

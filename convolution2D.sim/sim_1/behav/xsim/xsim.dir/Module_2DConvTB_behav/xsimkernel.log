@@ -1,7 +1,0 @@
-Running: xsim.dir/Module_2DConvTB_behav/xsimk.exe -simmode gui -wdb Module_2DConvTB_behav.wdb -simrunnum 0 -socket 55029
-Design successfully loaded
-Design Loading Memory Usage: 6012 KB (Peak: 6012 KB)
-Design Loading CPU Usage: 46 ms
-Simulation completed
-Simulation Memory Usage: 6740 KB (Peak: 6740 KB)
-Simulation CPU Usage: 124 ms

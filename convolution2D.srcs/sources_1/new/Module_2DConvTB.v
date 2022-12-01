@@ -48,7 +48,7 @@ reg clk, we;
 reg [ADDR_DATA-1:0] addr_data;
 reg [ADDR_KERNAL-1:0] addr_kernal;
 
-wire [IN_DATA_W-1:0]din_data; // input data from SRAM single line
+wire [IN_DATA_W-1:0]din_data;     // input data from SRAM single line
 wire [IN_KERNAL_W-1:0]din_kernal; // input kernal from SRAM single line
 
 //call SRAM module
@@ -69,6 +69,7 @@ reg [23:0] data_r ; //3 numbers
 reg [23:0] kern_r ; //3 numbers
 wire [19:0] partial_out ;
 reg arst_n;
+
 //call 2DConv module
 Module_Conv2D #(.DATA_WIDTH(24), .NUM_ELEMS(3), .OUT_WIDTH(20))
 conv (
@@ -89,26 +90,30 @@ begin
 end
 
 reg [23:0] kernal_d [0:2];
-
+reg [19:0] conv_out;
+reg [7:0]  value_a,value_b,value_c;
 integer i,j;
 initial begin
-    clk = 1'b0; we = 1'b0; addr_data = 0; addr_kernal = 0; arst_n = 1;
-
+    clk = 1'b0; we = 1'b0; addr_data = 0; addr_kernal = 0; arst_n = 1; addr_data = 0; conv_out =0; addr_kernal = 0;
+    value_a = 0; value_b = 0; value_c = 0;
+    #10;
     /* 
         Test01
         For Readind data from SRAM
     */
-    /*
+    /* 
     // read data from SRAM
     for (i = 0; i < DATA_ROWS; i = i + 1) begin 
         addr_data = i; #10;        
-        $display("[%d] DATA %b",i, din_data);        
+        $display("[%d] DATA %b",i, din_data);
+        $display("[%d] DATA [511:488] %b",i, din_data[511:488]);        
     end
     
     // read kernal from SRAM
     for (j = 0; j < KERNAL_ROWS; j = j + 1) begin 
         addr_kernal = j; #10;     
-        $display("[%d] KERNAL %b",j, din_kernal);        
+        $display("[%d] KERNAL %b",j, din_kernal);
+        $display("[%d] KERNAL [23:16] %b",j, din_kernal[23:16]);         
         
     end
     */
@@ -117,22 +122,52 @@ initial begin
         Test02
         For 1 Iteration of 2DConv: 3 values of matrix and 3 values of kernal
     */
-    /*
-    addr_data = 0;
-    addr_kernal = 0; #10; 
+//    /* 
+    //1st Rows of kernal and data matrix 
+    $display("Iteration 01");   
+    arst_n = 0;
+    data_r = din_data[511:488]; 
+    kern_r = din_kernal[23:0]; 
+    #10;   
+//    $display("[%d] KERNAL_DATA %b, DATA %b, OUTPUT %b",i, kern_r,data_r,partial_out); 
+    $display("Partial out 01 %d" , partial_out); 
+    conv_out = conv_out + partial_out;
+    
+    //2st Rows of kernal and data matrix
+    $display("Iteration 02");
+    addr_data = 1;
+    addr_kernal = 1; #10; 
         
     arst_n = 0;
-    data_r = din_data[23:0]; 
+    data_r = din_data[511:488]; 
     kern_r = din_kernal[23:0]; 
-    $display("[%d] KERNAL_DATA %b, DATA %b, OUTPUT %b",i, kern_r,data_r,partial_out);
-    #50;   
-    $display("[%d] KERNAL_DATA %b, DATA %b, OUTPUT %b",i, kern_r,data_r,partial_out);  
-    */
+    #10;   
+//    $display("[%d] KERNAL_DATA %b, DATA %b, OUTPUT %b",i, kern_r,data_r,partial_out);
+    $display("Partial out 02 %d" , partial_out);
+    conv_out = conv_out + partial_out;
+    
+    //3st Rows of kernal and data matrix
+    $display("Iteration 03");
+    addr_data = 2;
+    addr_kernal = 2; #10; 
+        
+    arst_n = 0;
+    data_r = din_data[511:488]; 
+    kern_r = din_kernal[23:0]; 
+    #10;   
+//    $display("[%d] KERNAL_DATA %b, DATA %b, OUTPUT %b",i, kern_r,data_r,partial_out);
+    $display("Partial out 03 %d" , partial_out);
+    conv_out = conv_out + partial_out;
+    
+    $display("Final Single out %d",conv_out);
+    $finish;
+//    */
+
 
     /* 
         Test03
         For 64 * 64 matrix and 3 * 3 kernal
-    */
+    
 
     // read kernal from SRAM
     for (j = 0; j < KERNAL_ROWS; j = j + 1) begin 
@@ -153,7 +188,25 @@ initial begin
 
         end
     end
+    */
 
+    /* 
+        Test04
+        For 3 * 3 matrix and 3 * 3 kernal
+    
+    arst_n = 0; value_a = 10; value_b = 11; value_c = 12;
+    //operation formet: MSB --- LSB * MSB --- LSB
+    for(i = 0; i < 3; i = i + 1) begin
+        data_r = {value_a, value_b, value_c};
+//        kern_r = {value_a,value_a,value_a};  // result = 130
+        kern_r = {value_a, value_b, value_c};  //result = 365
+        
+        #10;
+        $display("[%d] KERNAL_DATA %b, DATA %b, OUTPUT %d",i, kern_r,data_r,partial_out);
+        $finish;
+    end
+    
+    */
 end
 
 
