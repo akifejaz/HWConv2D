@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.1 (64-bit)
+# SW Build 2552052 on Fri May 24 14:49:42 MDT 2019
+# IP Build 2548770 on Fri May 24 18:01:18 MDT 2019
+# Start of session at: Wed Jan  4 06:14:21 2023
+# Process ID: 9116
+# Current directory: D:/Akif/ITU/Semester 7/FYI-I/Vivado/dsd_project/Conv2d/Conv2d.runs/synth_1
+# Command line: vivado.exe -log conv2d_controller.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source conv2d_controller.tcl
+# Log file: D:/Akif/ITU/Semester 7/FYI-I/Vivado/dsd_project/Conv2d/Conv2d.runs/synth_1/conv2d_controller.vds
+# Journal file: D:/Akif/ITU/Semester 7/FYI-I/Vivado/dsd_project/Conv2d/Conv2d.runs/synth_1\vivado.jou
+#-----------------------------------------------------------
+source conv2d_controller.tcl -notrace
